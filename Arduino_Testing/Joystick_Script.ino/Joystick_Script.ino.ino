@@ -26,14 +26,18 @@ void loop() { // just output, with the actual drone we'd translate these into se
   int button = digitalRead(swPin);
 
 
+  Serial.println();
   Serial.println("X: ");
   Serial.println(xVal);
+
   Serial.println();
   Serial.println("Y: ");
   Serial.println(yVal);
+
   Serial.println();
   Serial.println(" Button: ");
   Serial.println(button);
+
   delay(500); // 100 millisecond pause in between readings,
               //^ otherwise your human eyeballs wouldnt be able to keep up
 }
