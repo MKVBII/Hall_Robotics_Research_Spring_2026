@@ -5,6 +5,7 @@ const int swPin = 2; // this one (D2, wired the button function of the joy stick
                      // ^ or off (released) as oppose to the other signals from the movement of the joystick that are represented more accurately with waves.
                      // ^ Those are called "analog" signals
 
+
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600); // activates a serial connection between the computer (I'm on Mac) and the arduino via USB cable
@@ -25,15 +26,34 @@ void loop() { // just output, with the actual drone we'd translate these into se
   int yVal = analogRead(yPin);
   int button = digitalRead(swPin);
 
+  if (xVal > 502) { // hardcoded ranges I got from looking at the outputs, should probably look into a way for the system to calculate them based on the average (?)
+    Serial.println("MOVING FORWARD");
+  } else if (xVal < 500) {
+    Serial.println("MOVING BACKWARD");
+  } else {
+    Serial.println("AROUND THE MIDDLE");
+  }
 
+  if (yVal > 493) {
+    Serial.println("MOVING RIGHT");
+  } else if (yVal < 491) {
+    Serial.println("MOVING LEFT");
+  } else {
+    Serial.println("AROUND THE MIDDLE");
+  }
+
+  Serial.println();
   Serial.println("X: ");
   Serial.println(xVal);
+
   Serial.println();
   Serial.println("Y: ");
   Serial.println(yVal);
+
   Serial.println();
   Serial.println(" Button: ");
   Serial.println(button);
+
   delay(500); // 100 millisecond pause in between readings,
               //^ otherwise your human eyeballs wouldnt be able to keep up
 }
